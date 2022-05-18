@@ -1,0 +1,23 @@
+{
+  "name": "f-axios-transport",
+  "version": "0.1.0",
+  "description": "Frontend axios transport",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "api",
+    "transport",
+    "axios"
+  ],
+  "author": "Maksim Ivanov <tg@max_ivy>",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^8.14.0"
+  },
+  "dependencies": {
+    "@sweet-monads/either": "^3.0.1",
+    "axios": "^0.26.1"
+  }
+}
