@@ -15,8 +15,16 @@ export const useHttpService = (axios => (config, customs) => {
     error => Promise.reject(error)
   );
 
+  const services = new Set();
+
+  // TODO: implement
+  const defineService = constructor => {};
+
   if (!customs) {
-    return httpService;
+    return {
+      httpService,
+      setCommonHeader: setCommonHeader.bind(httpService),
+    };
   }
 
   const { serializers, interceptors } = customs;
@@ -33,10 +41,8 @@ export const useHttpService = (axios => (config, customs) => {
     setInterseptors.call(httpService, interceptors);
   }
 
-  const setters = {
+  return {
+    httpService,
     setCommonHeader: setCommonHeader.bind(httpService),
-    setInterseptors: setInterseptors.bind(httpService),
   };
-
-  return httpService;
 })(axios);
