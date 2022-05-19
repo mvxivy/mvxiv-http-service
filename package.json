@@ -1,5 +1,5 @@
 {
-  "name": "f-axios-transport",
+  "name": "f-transport",
   "version": "0.1.0",
   "description": "Frontend axios transport",
   "main": "index.js",
@@ -18,6 +18,6 @@
   },
   "dependencies": {
     "@sweet-monads/either": "^3.0.1",
-    "axios": "^0.26.1"
+    "axios": "^0.27.2"
   }
 }
