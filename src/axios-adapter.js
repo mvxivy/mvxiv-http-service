@@ -1,26 +1,42 @@
 import { default as axios, AxiosInstance } from 'axios';
+import { setInterseptors, setCommonHeader } from './utils';
 
 /**
  * Axios Adapter
- * @param { function } axios - axios constructor
- * @returns { function: AxiosInstance }
+ * @param { object } config - axios config
+ * @param { object } customs - customs preferences
+ * @returns { AxiosInstance }
  */
-const useAxiosAdapter = axios => (config, customs) => {
-  const transport = axios.create(config);
+export const useHttpService = (axios => (config, customs) => {
+  const httpService = axios.create(config);
 
-  transport.interceptors.request.use(
-    config => {
-      console.log(`[${config.method.toUpperCase()}] "${config.baseURL}${config.url}"`);
-      return config;
-    },
+  httpService.interceptors.response.use(
+    response => response.data,
     error => Promise.reject(error)
   );
-  transport.interceptors.response.use(response => {});
 
-  return transport;
-};
+  if (!customs) {
+    return httpService;
+  }
 
-/**
- * @returns { AxiosInstance  } transport
- */
-export const useHttpService = useAxiosAdapter(axios);
+  const { serializers, interceptors } = customs;
+
+  if (serializers) {
+    const { requestSerializers, responseSerializers, paramsSerializer } = serializers;
+
+    requestSerializers && httpService.defaults.transformRequest.unshift(...requestSerializers);
+    responseSerializers && httpService.defaults.transformResponse.push(...responseSerializers);
+    paramsSerializer && (httpService.defaults.paramsSerializer = paramsSerializer);
+  }
+
+  if (interceptors) {
+    setInterseptors.call(httpService, interceptors);
+  }
+
+  const setters = {
+    setCommonHeader: setCommonHeader.bind(httpService),
+    setInterseptors: setInterseptors.bind(httpService),
+  };
+
+  return httpService;
+})(axios);

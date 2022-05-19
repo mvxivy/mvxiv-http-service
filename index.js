@@ -4,5 +4,4 @@
  * [ ] Описать всё в доке
  */
 
-export { createApiContainer } from './api-container';
-export { default as ApiService } from './ApiService';
+export { createApiContainer } from './src/api-container';
