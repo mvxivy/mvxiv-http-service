@@ -1,6 +1,6 @@
 {
   "name": "mercury-http-service",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "Transport layer build upon axios",
   "scripts": {
     "build": "webpack"

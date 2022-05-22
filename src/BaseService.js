@@ -14,6 +14,12 @@ export class BaseService {
     });
   }
 
+  setHeader(key, value) {
+    delete this.#httpService.defaults.headers[key];
+    delete this.#httpService.defaults.headers.common[key];
+    this.#httpService.defaults.headers.common[key] = value;
+  }
+
   get(url, config) {}
 
   delete(url, config) {}
