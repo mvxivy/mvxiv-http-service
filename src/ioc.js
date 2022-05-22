@@ -20,7 +20,12 @@ export const createApiServiceContainer = (httpConfig, httpCustoms, serviceList) 
   const { defineService, setHeader, setInterceptors } = useHttpService(httpConfig, httpCustoms);
   const container = serviceList.reduce((container, Service) => {
     const key = Service.name[0].toLowerCase() + Service.name.slice(1);
-    container[key] = defineService(Service)();
+    container[key] = new Proxy(defineService(Service)(), {
+      get(target) {
+        const value = Reflect.get(...arguments);
+        return typeof value === 'function' ? value.bind(target) : value;
+      },
+    });
     return container;
   }, {});
 

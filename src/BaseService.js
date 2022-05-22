@@ -7,7 +7,7 @@ export class BaseService {
     ['get', 'delete', 'head', 'options', 'post', 'put', 'patch', 'request'].forEach(method => {
       Object.defineProperty(this, method, {
         configurable: false,
-        enumerable: true,
+        enumerable: false,
         writable: false,
         value: this.#httpService[method],
       });
