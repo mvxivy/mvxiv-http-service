@@ -6,6 +6,14 @@ const useSetHeader = instance => (key, value) => {
   instance.defaults.headers.common[key] = value;
 };
 
+const useSetInterceptors = instance => interceptors => {
+  for (const [type, intcTuples] of Object.entries(interceptors)) {
+    for (const tuple of intcTuples) {
+      instance.interceptors[type].use(...tuple);
+    }
+  }
+};
+
 const customize = function (httpService, customs) {
   const { serializers, interceptors } = customs;
 
@@ -18,14 +26,7 @@ const customize = function (httpService, customs) {
   }
 
   if (interceptors) {
-    const { request, response } = interceptors;
-    if (request?.length) {
-      request.forEach(tuple => httpService.interceptors.request.use(...tuple));
-    }
-
-    if (response?.length) {
-      response.forEach(tuple => httpService.interceptors.response.use(...tuple));
-    }
+    useSetInterceptors(httpService)(interceptors);
   }
 };
 
@@ -57,10 +58,12 @@ export const useHttpService = (config, customs) => {
   };
 
   const setHeader = useSetHeader(httpService);
+  const setInterceptors = useSetInterceptors(httpService);
 
   return {
     httpService,
     defineService,
     setHeader,
+    setInterceptors,
   };
 };
