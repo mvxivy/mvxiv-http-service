@@ -1,20 +1,23 @@
 {
-  "name": "f-transport",
-  "version": "0.1.0",
-  "description": "Frontend axios transport",
-  "main": "index.js",
+  "name": "mercury-http-service",
+  "version": "2.0.1",
+  "description": "Transport layer build upon axios",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "webpack"
   },
+  "private": true,
   "keywords": [
     "api",
+    "http",
     "transport",
     "axios"
   ],
   "author": "Maksim Ivanov <tg@max_ivy>",
   "license": "MIT",
   "devDependencies": {
-    "eslint": "^8.14.0"
+    "eslint": "^8.14.0",
+    "webpack": "^5.72.1",
+    "webpack-cli": "^4.9.2"
   },
   "dependencies": {
     "@sweet-monads/either": "^3.0.1",
