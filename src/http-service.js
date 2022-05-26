@@ -14,12 +14,23 @@ const useSetInterceptors = instance => interceptors => {
   }
 };
 
+const mergeSerializers = config => {
+  const { transformRequest, transformResponse } = config;
+  if (Array.isArray(transformRequest)) {
+    config.transformRequest = [...transformRequest, ...axios.defaults.transformRequest];
+  }
+  if (Array.isArray(transformResponse)) {
+    config.transformResponse = [...axios.defaults.transformResponse, ...transformResponse];
+  }
+};
+
 /**
  * @param { object } config - axios config
  * @param { object } [interceptors]
  * @returns {{ httpService: AxiosInstance, defineService: function, setHeader: function}}
  */
 export const useHttpService = (config, interceptors) => {
+  mergeSerializers(config);
   const httpService = axios.create(config);
 
   httpService.interceptors.response.use(
