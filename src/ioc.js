@@ -6,7 +6,8 @@ class RequiredParamError extends Error {
   }
 }
 
-const bindDecorator = service =>
+// TODO: replace to es decorator
+export const autobindDecorator = service =>
   new Proxy(service, {
     get(target) {
       const value = Reflect.get(...arguments);
@@ -21,15 +22,21 @@ const bindDecorator = service =>
  * @return { ApiServiceContainer }
  */
 
-export const createApiServiceContainer = (httpConfig, httpCustoms, serviceList) => {
+export const createApiServiceContainer = (httpConfig, httpInterceptors, serviceList) => {
   if (!httpConfig) throw new RequiredParamError('httpConfig', httpConfig);
   if (!serviceList) throw new RequiredParamError('serviceList', serviceList);
 
-  const { defineService, setHeader, setInterceptors } = useHttpService(httpConfig, httpCustoms);
+  const { defineService, setHeader, setInterceptors } = useHttpService(
+    httpConfig,
+    httpInterceptors
+  );
+
+  const constructors = new Set(serviceList);
   const container = serviceList.reduce((container, Service) => {
     const key = Service.name[0].toLowerCase() + Service.name.slice(1);
     const service = defineService(Service)();
-    container[key] = bindDecorator(service);
+    container[key] = autobindDecorator(service);
+    constructors.add(constructor);
     return container;
   }, {});
 
@@ -42,6 +49,22 @@ export const createApiServiceContainer = (httpConfig, httpCustoms, serviceList) 
     value: setInterceptors,
     enumerable: false,
   });
+
+  // Object.defineProperty(container, 'addService', {
+  //   configurable: false,
+  //   enumerable: false,
+  //   writable: false,
+  //   value: Service => {
+  //     if (constructors.has(Service)) {
+  //       console.error(new Error(`The service ${Service.name} already has an instance`));
+  //       return;
+  //     }
+  //     const key = Service.name[0].toLowerCase() + Service.name.slice(1);
+  //     const service = defineService(Service)();
+  //     container[key] = autobindDecorator(service);
+  //     constructors.add(constructor);
+  //   },
+  // });
 
   return container;
 };

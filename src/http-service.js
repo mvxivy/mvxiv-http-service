@@ -14,51 +14,31 @@ const useSetInterceptors = instance => interceptors => {
   }
 };
 
-const customize = function (httpService, customs) {
-  const { serializers, interceptors } = customs;
-
-  if (serializers) {
-    const { requestSerializers, responseSerializers, paramsSerializer } = serializers;
-
-    if (requestSerializers) httpService.defaults.transformRequest.unshift(...requestSerializers);
-    if (responseSerializers) httpService.defaults.transformResponse.push(...responseSerializers);
-    if (paramsSerializer) httpService.defaults.paramsSerializer = paramsSerializer;
-  }
-
-  if (interceptors) {
-    useSetInterceptors(httpService)(interceptors);
-  }
-};
-
 /**
  * @param { object } config - axios config
- * @param { object } customs - interceptors, serializers as custom plugins collection
+ * @param { object } interceptors
  * @returns {{ httpService: AxiosInstance, defineService: function, setHeader: function}}
  */
-export const useHttpService = (config, customs) => {
+export const useHttpService = (config, interceptors) => {
   const httpService = axios.create(config);
 
   httpService.interceptors.response.use(
     response => response.data,
     error => Promise.reject(error)
   );
-  if (typeof customs === 'object') customize(httpService, customs);
-
-  const constructors = new Set();
-  const defineService = (constructor, props = []) => {
-    if (constructors.has(constructor)) {
-      console.error(new Error(`The service ${constructor.name} already has an instance`));
-      return;
-    }
-
-    const constructorArgs = [httpService, ...props];
-    const instance = Reflect.construct(constructor, constructorArgs);
-    constructors.add(constructor);
-    return () => instance;
-  };
 
   const setHeader = useSetHeader(httpService);
   const setInterceptors = useSetInterceptors(httpService);
+
+  if (interceptors) {
+    setInterceptors(interceptors);
+  }
+
+  const defineService = (constructor, props = []) => {
+    const constructorArgs = [httpService, ...props];
+    const instance = Reflect.construct(constructor, constructorArgs);
+    return () => instance;
+  };
 
   return {
     httpService,
