@@ -16,7 +16,7 @@ const useSetInterceptors = instance => interceptors => {
 
 /**
  * @param { object } config - axios config
- * @param { object } interceptors
+ * @param { object } [interceptors]
  * @returns {{ httpService: AxiosInstance, defineService: function, setHeader: function}}
  */
 export const useHttpService = (config, interceptors) => {

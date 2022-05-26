@@ -17,12 +17,12 @@ export const autobindDecorator = service =>
 
 /**
  * @param { Object } serviceList
- * @param { Object } config - axios configuration
- * @param { Object } plugins - axios plugins (serializers, interceptors, etc.)
- * @return { ApiServiceContainer }
+ * @param { Object } httpConfig - axios configuration
+ * @param { Object } [httpInterceptors] - axios plugins (serializers, interceptors, etc.)
+ * @return { * } apiServiceContainer
  */
 
-export const createApiServiceContainer = (httpConfig, httpInterceptors, serviceList) => {
+export const createApiServiceContainer = (serviceList, httpConfig, httpInterceptors) => {
   if (!httpConfig) throw new RequiredParamError('httpConfig', httpConfig);
   if (!serviceList) throw new RequiredParamError('serviceList', serviceList);
 
