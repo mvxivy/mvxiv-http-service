@@ -1,16 +1,17 @@
 {
   "name": "@mvxiv/http-service",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Http service for frontend build upon axios",
   "repository": {
     "type": "git",
     "url": "https://github.com/mvxivy/ivy-http-service"
   },
   "type": "module",
-  "main": "module.js",
+  "main": "./dist/module.min.js",
   "types": "module.d.ts",
   "files": [
     "lib/",
+    "dist/",
     "module.d.ts"
   ],
   "readmeFilename": "README.md",
