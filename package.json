@@ -21,7 +21,6 @@
     "fmt": "prettier --write \"**/*.js\" \"**/*.json\" \"**/*.md\" \"**/*.yml\" \"**/*.ts\"",
     "build": "webpack"
   },
-  "private": true,
   "keywords": [
     "api",
     "http",
