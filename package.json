@@ -1,5 +1,5 @@
 {
-  "name": "mercury-http-service",
+  "name": "ivy-http-service",
   "version": "2.2.2",
   "description": "Transport layer build upon axios",
   "scripts": {
