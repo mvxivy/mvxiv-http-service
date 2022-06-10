@@ -1,6 +1,6 @@
 {
   "name": "@mvxiv/http-service",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Http service for frontend build upon axios",
   "repository": {
     "type": "git",
