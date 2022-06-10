@@ -1,5 +1,5 @@
 {
-  "name": "@ivy-frontend/http-service",
+  "name": "@mvxiv/http-service",
   "version": "1.0.0",
   "description": "Http service for frontend build upon axios",
   "repository": {
