@@ -11,7 +11,7 @@ declare module "BaseService" {
         put(url: any, payload: any, config: any): void;
         patch(url: any, payload: any, cofig: any): void;
         request(config: any): void;
-        #private;
+        private httpService: any;
     }
 }
 declare module "http-service" {
