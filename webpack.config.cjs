@@ -1,9 +1,9 @@
 const path = require('path');
 
 module.exports = {
-  entry: './src/index.js',
+  entry: './module.js',
   output: {
-    filename: 'index.js',
+    filename: 'module.min.js',
     path: path.resolve(__dirname, 'dist'),
     library: {
       type: 'module',
