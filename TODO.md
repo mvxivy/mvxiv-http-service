@@ -1,0 +1,2 @@
+- [ ] Types support for IDE's
+- [ ] Refactoring BaseService
