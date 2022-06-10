@@ -3,10 +3,13 @@
     "target": "ESNext",
     "moduleResolution": "classic",
     "strict": true,
-    "noEmit": true,
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "allowJs": true,
     "baseUrl": ".",
     "preserveWatchOutput": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "outFile": "./module.d.ts"
   },
-  "include": ["*.d.ts"]
+  "include": ["lib/**/*"]
 }
