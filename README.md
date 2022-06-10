@@ -16,7 +16,7 @@
 ```javascript
 // http.service.js
 
-import { useHttpService } from 'http-service';
+import { useHttpService } from '@mvxiv/http-service';
 import { 
   paramsSerializer,
   requestSerializer,
@@ -101,7 +101,7 @@ and use factory:
 // api.ioc.js
 
 // ...
-import { createApiServiceContainer } from 'http-service';
+import { createApiServiceContainer } from '@mvxiv/http-service';
 
 //...
 const config = {
@@ -120,7 +120,7 @@ http methods provides: `get, delete, head, options, post, put, patch` and axios 
 ```javascript
 // transaction.service.js
 
-import { BaseService } from 'http-service';
+import { BaseService } from '@mvxiv/http-service';
 import { httpService } from '../services/http.service.js';
 
 export class TransactionService extends BaseService {
