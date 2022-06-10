@@ -4,14 +4,16 @@ export class BaseService {
   constructor(httpService) {
     this.#httpService = httpService;
 
-    ['get', 'delete', 'head', 'options', 'post', 'put', 'patch', 'request'].forEach(method => {
+    const methods = ['get', 'delete', 'head', 'options', 'post', 'put', 'patch', 'request'];
+
+    for (const method of methods) {
       Object.defineProperty(this, method, {
         configurable: false,
         enumerable: false,
         writable: false,
         value: this.#httpService[method],
       });
-    });
+    }
   }
 
   setHeader(key, value) {
