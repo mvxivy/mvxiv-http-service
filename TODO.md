@@ -1,2 +1,3 @@
-- [ ] Types support for IDE's
-- [ ] Refactoring BaseService
+- [ ] Types support for `IDE's`
+- [ ] Refactoring `BaseService`
+- [ ] Use new ES decorators for `autobindDecorator` function 

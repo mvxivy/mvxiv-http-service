@@ -9,7 +9,7 @@
 
 ## Usage
 ---
-**`useHttpService`([config](https://axios-http.com/docs/req_config), [interceptors](https://github.com/axios/axios#interceptors))** 
+**`useHttpService`**([config](https://axios-http.com/docs/req_config), [interceptors](https://github.com/axios/axios#interceptors))
 
 
 ### 1. setup
@@ -37,7 +37,7 @@ const interceptors = {
   response: [
     [res => right(res), error => left(error)]
   ],
-}
+};
 
 export const { 
   httpService,
@@ -80,20 +80,20 @@ httpService.get('/products', { params: { limit: 10, offset: 20 } });
 ```
 ___
 
-**`createApiServiceContainer`(httpConfig, httpInterceptors, serviceList)**
+**`createApiServiceContainer`**(`constructorsDict`, `httpConfig`, `httpInterceptors`)
 
 `httpConfig` and `httpInterceptors` contracts equals to `useHttpService` arguments.<br>
-`serviceList` is array of constructors, for example:
+`constructorsDict` is dictionary of constructors (key, value pairs), for example:
 ```javascript
 // api.ioc.js
 
 import { UserService } from '../services/user.service.js';
 import { ProductService } from '../services/product.service.js';
 
-const serviceList = [
+const constructorsDict = {
   UserService,
-  ProductService
-];
+  productService: ProductService
+};
 ```
 
 and use factory:
@@ -108,10 +108,10 @@ const config = {
   baseURL: 'https//some-domain.com/api'
 };
 
-export const container = createApiServiceContainer(serviceList, config) // interceptors is optional param
+export const container = createApiServiceContainer(constructorsDict, config) // interceptors is optional param
 ```
 ___
-**`BaseService`(httpService)**
+**`BaseService`**(`httpService`)
 
 Is class for inheritance and provide to your own classes context http methods and `setHeader` method.
 
