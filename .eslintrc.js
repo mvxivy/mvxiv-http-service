@@ -21,6 +21,10 @@ module.exports = {
       100,
       { ignorePattern: '^import\\s.+\\sfrom\\s.+;$', ignoreComments: true },
     ],
+    'linebreak-style': [
+      'error',
+      'unix',
+    ],
     'no-param-reassign': 'off',
     'global-require': 'off',
     radix: 'off',
