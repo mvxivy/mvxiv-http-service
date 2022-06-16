@@ -87,12 +87,22 @@ ___
 ```javascript
 // api.ioc.js
 
-import { UserService } from '../services/user.service.js';
-import { ProductService } from '../services/product.service.js';
+import { UserService } from '../services/UserService.js';
+import { ProductService } from '../services/ProductService.js';
+import { PaymentService } from '../services/PaymentService.js';
+
+class FooDependencyService {};
+class BarDependencyService {};
 
 const constructorsDict = {
   UserService,
-  productService: ProductService
+  productService: ProductService,
+  // additional syntax (from v.1.1.2) first place - constructor, rest - arguments
+  paymentService: [
+    PaymentService,
+    new FooDependencyService(),
+    new BarDependencyService()
+  ],
 };
 ```
 
