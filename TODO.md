@@ -1,3 +1,5 @@
-- [ ] Types support for `IDE's`
+- [x] Types support for `IDE's`
+- [ ] Set provided params on defineService in `createApiServiceContainer`
+- [ ] Tests
 - [ ] Refactoring `BaseService`
 - [ ] Use new ES decorators for `autobindDecorator` function 
