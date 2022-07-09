@@ -3,3 +3,4 @@
 - [ ] Tests
 - [ ] Refactoring `BaseService` // 1.1.4
 - [ ] Use new ES decorators for `autobindDecorator` function // 1.2.0
+- [ ] TypeScript version
